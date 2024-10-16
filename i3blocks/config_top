@@ -1,0 +1,111 @@
+# ~/.config/i3blocks/config_top
+
+# Title of the currently focused window
+[title]
+command=~/.config/i3blocks/scripts/title.sh
+interval=1
+color=#b4befe
+separator=true
+separator_block_width=15
+
+# CPU Frequency
+[cpu_freq]
+label=
+command=lscpu | grep "MHz" | awk '{print $3 " MHz"}'
+interval=10
+color=#99d1db
+separator=true
+separator_block_width=15
+
+# CPU and GPU Temperatures
+[temps]
+label=
+command=sensors | awk '/Core 0/ {print "CPU:" $3} /GPU:/ {print " GPU:" $2}'
+interval=10
+color=#96CDFB
+separator=true
+separator_block_width=15
+
+# Disk IO
+[disk_io]
+label=
+command=iostat -d | awk 'NR==4 {print $1 ": " $3 "KB/s"}'
+interval=10
+color=#D397F8
+separator=true
+separator_block_width=15
+
+# Git Branch
+[git_branch]
+label=
+command=git -C $(pwd) rev-parse --abbrev-ref HEAD
+interval=30
+color=#FAB387
+separator=true
+separator_block_width=15
+
+# Process Monitor
+[process]
+label=
+command=ps axch -o cmd:15,%cpu --sort=-%cpu | head -n 1
+interval=10
+color=#A6E3A1
+separator=true
+separator_block_width=15
+
+
+# FTP Connections and Speed
+[ftp]
+label=
+command=~/.config/i3blocks/scripts/ftp_monitor.sh
+interval=10
+color=#04a5e5
+separator=true
+separator_block_width=15
+
+
+# SSH Connections
+[ssh]
+label=
+command=ss | grep -o 'ssh' | wc -l
+interval=30
+color=#96CDFB
+separator=true
+separator_block_width=15
+
+# System Updates
+[updates]
+label=
+command=apt list --upgradable 2>/dev/null | grep -c upgradable
+interval=3600
+color=#FAB387
+separator=true
+separator_block_width=15
+
+# Battery
+[battery]
+label=
+command=acpi -b | awk '{print $4}' | sed 's/,//'
+interval=30
+color=#D3D3D3
+separator=true
+separator_block_width=15
+
+[keyboard_layout]
+label=
+command=~/scripts/keyboard_layout.sh
+interval=1
+color=#FAB387
+separator=true
+separator_block_width=15
+#
+# [connect_bluetooth_phone]
+# command=~/connect_earphones_via_phone.sh
+# interval=600
+# label=PhoneBT
+#
+# [bluetooth_toggle]
+# command=~/toggle_bluetooth.sh
+# interval=60
+# label=BT
+# separator_block_width=15
